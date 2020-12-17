@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Friends List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-margin-horizontal">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="6">
+        <ion-item lines="none" class="ion-margin-top border-full">
+          <ion-text>Add Friends</ion-text>
+          <ion-buttons slot="end">
+            <ion-button routerLink="./add">
+              <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="6">
+        <ion-item lines="none" class="ion-margin-top border-full">
+          <ion-input type="text" [(ngModel)]="searchValue" placeholder="Search New Friend" (ionChange)="searchUser()"></ion-input>
+          <ion-icon class="ion-align-self-end" slot="end" name="search-circle" (click)="searchUser()" style="cursor: pointer"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-sm="6" *ngIf="userFriendsFilter">
+        <ion-card *ngFor="let Friend of userFriendsFilter; let i = index" (press)="onPress(i, Friend.firstname, Friend.lastname )">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3" size-sm="2">
+              <ion-img src="assets/icon/unisex.png" style="object-fit: contain" *ngIf="!Friend.foto"></ion-img>
+              <img id="friendsPicture{{i}}" src="{{ Friend.foto }}" class="circle-image" *ngIf="Friend.foto" (load)="imageLoaded($event)">
+            </ion-col>
+            <ion-col size="9" size-sm="10">{{ Friend.firstname }} {{ Friend.lastname }}</ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

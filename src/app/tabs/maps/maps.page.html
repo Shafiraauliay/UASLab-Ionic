@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div #map id="map"></div>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col id="fabOpenModal" >
+        <ion-button expand="full" shape="round" mode="ios"(click)="openModal()">
+          Check-In Location
+        </ion-button>
+      </ion-col>
+      <ion-col id="fabCurLoc" size="auto">
+        <ion-button (click)="showCurrentLoc()" shape="round" mode="ios" color="dark">
+          <ion-icon name="location" class="icon-get-location"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row id="transparentLayer" class="ion-hide max-width-height bg-layer" slot="fixed" (click)="hideModal()"></ion-row>
+  <ion-row id="modalLayer" class="ion-hide ion-justify-content-center ion-align-items-center max-width-height">
+    <ion-card style="z-index: 1000;">
+      <ion-row>
+      <ion-col>
+        <ion-item style="margin-top: -8px; margin-bottom: -8px">
+          <ion-label position="floating">Where am I? </ion-label>
+          <ion-input [(ngModel)]="locationValue" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button expand="full" shape="round" mode="ios" color="success" (click)="checkIn()" [disabled]="locationValue == ''">
+          Check-In
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-right" size="auto">
+        <ion-icon name="close-circle" style="font-size: 1.2em;" (click)="hideModal()"></ion-icon>
+      </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-margin-horizontal" *ngIf="user">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="7" size-sm="2">
+        <ion-row class="ion-align-items-end ion-justify-content-end">
+          <ion-fab-button color="primary" style="position: absolute; z-index: 1" (click)="presentActionSheet()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+          <input type="file" *ngIf="isDesktop" #filePicker (change)="onFileChoose($event)">
+          <ion-img src="assets/icon/person.webp" style="object-fit: contain" *ngIf="!photo"></ion-img>
+          <img id="profilePicture" src="{{photo}}" class="circle-image" *ngIf="photo" (load)="imageLoaded()">
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3">
+        <ion-text class="ion-text-center">
+          <ion-card>
+          <h2 class="text-bold ion-no-margin ion-margin-top">{{ user.firstname }} {{ user.lastname }}</h2>
+          <h4 class="text-bold ion-no-margin ion-margin-top">Shafira Aulia Yasmin</h4>
+          <h4 class="ion-no-margin ion-padding-bottom">00000025149</h4>
+          <h4 class="text-bold ion-no-margin ion-margin-top">Kesan Pesan</h4>
+          <h6 class="ion-no-margin ion-padding-bottom">
+            Kelas Mobile Platform memberikan ilmu baru yang sangat bermanfaat.
+            Dan ingin mengucapkan terima kasih kepada Ko Yehez dan Ko James yang sudah menjadi Aslab di kelas Mobile Platform.
+          </h6>
+          <ion-row class="ion-padding-top ion-justify-content-center">
+            <ion-col lines="none" class="border-full">
+              <ion-button class="ion-margin-top" color="tertiary" expand="full" mode="ios" (click)="Logout()">Logout</ion-button>
+            </ion-col>
+          </ion-row>
+          </ion-card>
+        </ion-text>
+        <div class="ion-padding ion-margin-top border-full">
+          <ion-card-title class="ion-margin-bottom text-bold" style="font-size: 1em">My Feeds</ion-card-title>
+          <div class="text-gray" *ngIf="!user.locations" style="font-size:0.8em">No History Available.</div>
+          <div *ngIf="user.locations">
+            <ion-item lines="none" class="border-item" style="font-size: 0.8em" *ngFor="let Location of user.locations; let i = index" (press)="onPress(i)">
+              <ion-label>
+                <span class="text-gray" style="font-size: 0.9em">{{ Location.tanggal }}</span>
+                <div style="padding-top: 4px; font-size: 1.1em">{{ Location.nama }}</div>
+              </ion-label>
+            </ion-item>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

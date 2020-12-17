@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid justify-content-center align-items-center>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11" size-sm="6" class="ion-padding-top">
+          <ion-img  style="height: 10em; padding-top: 25px;" src="assets/icon/login.png"></ion-img>
+        <div class="ion-padding-horizontal ion-margin-top ion-padding-top">
+          <form class="form" [formGroup]="login_form" (ngSubmit)="Login()">
+            <ion-item lines="none" class="border-full">
+              <ion-icon slot="start" name="mail" class="ion-align-self-center"></ion-icon>
+              <ion-label position="stacked">Email</ion-label>
+              <ion-input type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item lines="none" class='error-message' *ngIf="login_form.controls.email.touched && !login_form.controls.email.valid">
+              <ion-label no-margin stacked>Email Wrong</ion-label>
+            </ion-item>
+            <ion-item lines="none" class="ion-margin-top border-full">
+              <ion-icon slot="start" name="key" class="ion-align-self-center"></ion-icon>
+              <ion-label position="stacked">Password</ion-label>
+              <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
+              <ion-icon class="ion-align-self-center" size="small" slot="end" [name]="passwordToggleIcon" (click)="togglePass()"></ion-icon>
+            </ion-item>
+            <ion-item lines="none" class='error-message' *ngIf="login_form.controls.password.touched && !login_form.controls.password.valid">
+              <ion-label no-margin stacked>Password Wrong</ion-label>
+            </ion-item>
+            <ion-row class="ion-justify-content-center ion-margin-top">
+              <ion-col lines="none" class="border-full">
+                <ion-button type="submit" color="primary" expand="block" [disabled]="!login_form.valid">
+                  Log In
+                </ion-button>
+                <ion-label >
+                  <p class="go-to-register">No account yet? <a (click)="goToRegisterPage()">Register Here.</a></p>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
